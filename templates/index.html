@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChristianRodriguezValdiviezo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Audio Command Interface</h1>
+        <button id="start-btn">Start Monitoring</button>
+        <button id="stop-btn">Stop Monitoring</button>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        document.getElementById('start-btn').addEventListener('click', function() {
+            fetch('/start_monitoring', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status').innerText = data.status;
+                });
+        });
+
+        document.getElementById('stop-btn').addEventListener('click', function() {
+            fetch('/stop_monitoring', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status').innerText = data.status;
+                });
+        });
+    </script>
+</body>
+</html>
